@@ -16,14 +16,14 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 
 
-app.get('/', (req,res)=>{
+app.get('/', (req, res) => {
     res.send("You are Calling Main URL");
 });
 
 app.use('/auth', routes)
 
 
-app.listen(PORT,()=>{
+app.listen(PORT, () => {
     console.log(`Our Server is Running on the ${PORT} `)
 })
 
