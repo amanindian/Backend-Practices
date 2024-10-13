@@ -8,7 +8,8 @@ const registerModel = new mongoose.Schema({
     },
     phone: {
         type: Number,
-        require: true
+        require: true,
+        unique: true
     },
     email: {
         type: String,
@@ -16,18 +17,19 @@ const registerModel = new mongoose.Schema({
     },
     password: {
         type: String,
-        require: true
+        require: true,
+        unique: true
     },
     address: {
         type: String,
     },
-    date: {
-        type: String,
-        default: Date.now
-    }
-
+    role: {
+        type: Number,
+        default: 0,
+        require: true
+    },
+}, {
+    timestamps: true
 })
-
-
 
 export default mongoose.model("users", registerModel)

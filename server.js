@@ -26,4 +26,3 @@ app.use('/auth', routes)
 app.listen(PORT, () => {
     console.log(`Our Server is Running on the ${PORT} `)
 })
-

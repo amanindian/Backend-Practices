@@ -23,16 +23,21 @@ export const registerController = async (req, res) => {
 
     try {
         const hashedPass = await hashPassword(password)
-        console.log(hashedPass)
         const checkUser = await registerModel.findOne({ phone });
-        if (checkUser) {
-            res.status(400).send("User Already Register please login ")
-            console.log("first")
+        const checkUserEmail = await registerModel.findOne({ email });
+        if (checkUser || checkUserEmail) {
+            res.status(400).send(`User ${checkUser ? "Phone Number" : "Email"} Already Register please login `);
             return;
         } else {
-            const user = await new registerModel({ name, phone, email, password: hashedPass, address }).save();
-
-            res.status(200).send(user)
+            await new registerModel({ name, phone, email, password: hashedPass, address }).save();
+            res.status(200).send({
+                success: true,
+                message: "User Registered Successfully",
+                user: {
+                    Name: name, Phone: phone, Email: email
+                }
+            }
+            )
         }
 
     } catch (error) {
